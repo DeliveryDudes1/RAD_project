@@ -54,14 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Course.cs" />
+    <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student.cs" />
     <Compile Include="StudentAssigmentContext.cs" />
     <Compile Include="StudentAssignmentInitialzer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Courses.csv" />
+    <Compile Include="StudentModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="StudentList1.csv" />

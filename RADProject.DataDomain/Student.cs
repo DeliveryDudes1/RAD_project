@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RADProject.DataDomain
 {
-    [Table("Student")]
+    [Table("Students")]
     public class Student
     {
         [Key]
@@ -16,8 +16,6 @@ namespace RADProject.DataDomain
         public string StudentID { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
-
-        public virtual ICollection<Course> StudentCourses { get; set; }
 
         public override string ToString()
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RADProject.DataDomain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,7 @@ namespace RADProjectWebAPI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            StudentAssigmentContext db = new StudentAssigmentContext();
         }
     }
 }
