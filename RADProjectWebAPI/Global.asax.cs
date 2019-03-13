@@ -19,7 +19,7 @@ namespace RADProjectWebAPI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            StudentAssigmentContext db = new StudentAssigmentContext();
+           // StudentAssigmentContext db = new StudentAssigmentContext();
         }
     }
 }

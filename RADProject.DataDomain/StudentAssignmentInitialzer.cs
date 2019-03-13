@@ -19,28 +19,60 @@ namespace RADProject.DataDomain
         }
         protected override void Seed(StudentAssigmentContext context)
         {
-            Seed_db_Students(context);
+            // Seed_db_Students(context);
 
-            context.Modules.AddOrUpdate(
+            context.Modules.AddOrUpdate(new Module[]
+            {
                 new Module
                 {
-                    
                     Name = "Software Development",
                     Desription = "Programming"
-
-                });
-            context.Modules.AddOrUpdate(
+                },
                 new Module
                 {
-
                     Name = "Games Development",
                     Desription = "Programming"
+                }
+            });
 
-                });
+
+            context.Students.AddOrUpdate(new Student[]
+            {
+                new Student
+                {
+                    StudentID = "S00167749",
+                    FirstName = "Arif",
+                    SecondName ="Matin"
+                },
+                new Student
+                {
+                    StudentID = "S00167750",
+                    FirstName = "John",
+                    SecondName = "Matin"
+                }
+            });
+
+            context.Lecturers.AddOrUpdate(new Lecturer[]
+                {
+                new Lecturer
+                {
+                    ID = 1,
+                    FirstName = "Paul",
+                    SecondName = "Diddy"
+                },
+                new Lecturer
+                {
+
+                    FirstName = "John",
+                    SecondName = "Jones"
+                }
+             });
+
 
             context.SaveChanges();
             base.Seed(context);
         }
+
         private void Seed_db_Students(StudentAssigmentContext context)
         {
             List<Student> students = new List<Student>();

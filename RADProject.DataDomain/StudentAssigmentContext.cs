@@ -11,6 +11,8 @@ namespace RADProject.DataDomain
     {
         public DbSet<Student> Students { get; set; }
         public DbSet<Module> Modules { get; set; }
+        public DbSet<Lecturer> Lecturers { get; set; }
+        public DbSet<StudentModule> StudentModules { get; set; }
 
         public StudentAssigmentContext() : base("StudentAssignment")
         {

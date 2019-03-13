@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 namespace RADProject.DataDomain
 {
     [Table("StudentModules")]
-    class StudentModule
+    public class StudentModule
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         [ForeignKey("associatedStudent")]
-        public int StudentID { get; set; }
+        public string StudentID { get; set; }
         [ForeignKey("associatedModule")]
         public int ModuleID { get; set; }
         public virtual Student associatedStudent { get; set; }

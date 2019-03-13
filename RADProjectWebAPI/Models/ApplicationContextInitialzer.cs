@@ -17,23 +17,23 @@ namespace RADProjectWebAPI.Models
         }
         protected override void Seed(ApplicationDbContext context)
         {
-            //Random r = new Random();
-            //PasswordHasher hasher = new PasswordHasher();
+            Random r = new Random();
+            PasswordHasher hasher = new PasswordHasher();
 
-            //var manager =
-            //    new UserManager<ApplicationUser>(
-            //        new UserStore<ApplicationUser>(context));
+            var manager =
+                new UserManager<ApplicationUser>(
+                    new UserStore<ApplicationUser>(context));
 
-            //var roleManager =
-            //    new RoleManager<IdentityRole>(
-            //        new RoleStore<IdentityRole>(context));
+            var roleManager =
+                new RoleManager<IdentityRole>(
+                    new RoleStore<IdentityRole>(context));
 
-            //context.Roles.AddOrUpdate(c => c.Name,
-            //    new IdentityRole { Name = "Admin" }
-            //    );
+            context.Roles.AddOrUpdate(c => c.Name,
+                new IdentityRole { Name = "Admin" }
+                );
 
-            //context.SaveChanges();
-            //base.Seed(context);
+            context.SaveChanges();
+            base.Seed(context);
         }
     }
 }
