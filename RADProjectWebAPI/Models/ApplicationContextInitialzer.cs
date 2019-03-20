@@ -50,8 +50,76 @@ namespace RADProjectWebAPI.Models
                         FirstName = "Paul",
                         SecondName = "Powell",
                         PasswordHash = ps.HashPassword("Ppowell$1")
+                    },
+
+                   new ApplicationUser
+                    {
+                        UserName = "banks.shane@itsligo.ie",
+                        Email = "banks.shane@itsligo.ie",
+                        SecurityStamp = Guid.NewGuid().ToString(),
+                        EmailConfirmed = true,
+                        FirstName = "Shane",
+                        SecondName = "Banks",
+                        PasswordHash = ps.HashPassword("Sbanks$1")
+                    },
+
+                   new ApplicationUser
+                    {
+                        UserName = "kinsella.vivian@itsligo.ie",
+                        Email = "kinsella.vivian@itsligo.ie",
+                        SecurityStamp = Guid.NewGuid().ToString(),
+                        EmailConfirmed = true,
+                        FirstName = "Vivian",
+                        SecondName = "Kinsella",
+                        PasswordHash = ps.HashPassword("Vkinsella$1")
+                    },
+
+                   new ApplicationUser
+                    {
+                        UserName = "harte.padraig@itsligo.ie",
+                        Email = "harte.padraig@itsligo.ie",
+                        SecurityStamp = Guid.NewGuid().ToString(),
+                        EmailConfirmed = true,
+                        FirstName = "Padraig",
+                        SecondName = "Harte",
+                        PasswordHash = ps.HashPassword("Pharte$1")
+                    },
+
+                   new ApplicationUser
+                    {
+                        UserName = "mcmanus.keith@itsligo.ie",
+                        Email = "mcmanus.keith@itsligo.ie",
+                        SecurityStamp = Guid.NewGuid().ToString(),
+                        EmailConfirmed = true,
+                        FirstName = "Keith",
+                        SecondName = "Mcmanus",
+                        PasswordHash = ps.HashPassword("Kmcmanus$1")
+                    },
+
+                   new ApplicationUser
+                    {
+                        UserName = "weir.john@itsligo.ie",
+                        Email = "weir.john@itsligo.ie",
+                        SecurityStamp = Guid.NewGuid().ToString(),
+                        EmailConfirmed = true,
+                        FirstName = "John",
+                        SecondName = "Weir",
+                        PasswordHash = ps.HashPassword("Jweir$1")
+                    },
+
+                   new ApplicationUser
+                    {
+                        UserName = "taylor.leonard@itsligo.ie",
+                        Email = "taylor.leonard@itsligo.ie",
+                        SecurityStamp = Guid.NewGuid().ToString(),
+                        EmailConfirmed = true,
+                        FirstName = "Leonard",
+                        SecondName = "Taylor",
+                        PasswordHash = ps.HashPassword("Ltaylor$1")
                     }
                });
+
+            
             context.SaveChanges();
 
             // Assign Roles
