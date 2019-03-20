@@ -14,7 +14,7 @@ namespace RADProjectWebAPI.Data_Abstraction_Layer
         IEnumerable<Lecturer> GetAllLecturer();
 
         void AssignStudentToModule(StudentModuleDTO studentModuleDTO);
-        void AssignLecturerToModule(Lecturer item);
+        void AssignLecturerToModule(LecturerModuleDTO lecturerModuleDTO);
 
         void Save();
     }

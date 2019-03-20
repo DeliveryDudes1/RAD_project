@@ -12,12 +12,18 @@ namespace RADProjectWebAPI.Models
     public class AdminRepository : IAdminRepository
     {
        
-        ApplicationDbContext appdb = new ApplicationDbContext();
+        //ApplicationDbContext appdb = new ApplicationDbContext();
         StudentAssigmentContext db = new StudentAssigmentContext();
 
-        public void AssignLecturerToModule(Lecturer item)
+        public void AssignLecturerToModule(LecturerModuleDTO lecturerModuleDTO)
         {
-            throw new NotImplementedException();
+            LecturerModule lm = new LecturerModule
+            {
+                LecturerID = lecturerModuleDTO.LecturerID,
+                ModuleID = lecturerModuleDTO.ModuleID
+            };
+            db.LecturerModules.Add(lm);
+            //throw new NotImplementedException();
         }
 
         public void AssignStudentToModule(StudentModuleDTO studentModuleDTO)
@@ -41,13 +47,14 @@ namespace RADProjectWebAPI.Models
 
         public IEnumerable<Module> GetAllModule()
         {
-            throw new NotImplementedException();
+            return db.Modules;
+            //throw new NotImplementedException();
         }
 
         public IEnumerable<Student> GetAllStudents()
         {
-            
-            throw new NotImplementedException();
+            return db.Students;
+            //throw new NotImplementedException();
         }
 
         public void Save()
