@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using RADProject.DataDomain;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -50,72 +51,6 @@ namespace RADProjectWebAPI.Models
                         FirstName = "Paul",
                         SecondName = "Powell",
                         PasswordHash = ps.HashPassword("Ppowell$1")
-                    },
-
-                   new ApplicationUser
-                    {
-                        UserName = "banks.shane@itsligo.ie",
-                        Email = "banks.shane@itsligo.ie",
-                        SecurityStamp = Guid.NewGuid().ToString(),
-                        EmailConfirmed = true,
-                        FirstName = "Shane",
-                        SecondName = "Banks",
-                        PasswordHash = ps.HashPassword("Sbanks$1")
-                    },
-
-                   new ApplicationUser
-                    {
-                        UserName = "kinsella.vivian@itsligo.ie",
-                        Email = "kinsella.vivian@itsligo.ie",
-                        SecurityStamp = Guid.NewGuid().ToString(),
-                        EmailConfirmed = true,
-                        FirstName = "Vivian",
-                        SecondName = "Kinsella",
-                        PasswordHash = ps.HashPassword("Vkinsella$1")
-                    },
-
-                   new ApplicationUser
-                    {
-                        UserName = "harte.padraig@itsligo.ie",
-                        Email = "harte.padraig@itsligo.ie",
-                        SecurityStamp = Guid.NewGuid().ToString(),
-                        EmailConfirmed = true,
-                        FirstName = "Padraig",
-                        SecondName = "Harte",
-                        PasswordHash = ps.HashPassword("Pharte$1")
-                    },
-
-                   new ApplicationUser
-                    {
-                        UserName = "mcmanus.keith@itsligo.ie",
-                        Email = "mcmanus.keith@itsligo.ie",
-                        SecurityStamp = Guid.NewGuid().ToString(),
-                        EmailConfirmed = true,
-                        FirstName = "Keith",
-                        SecondName = "Mcmanus",
-                        PasswordHash = ps.HashPassword("Kmcmanus$1")
-                    },
-
-                   new ApplicationUser
-                    {
-                        UserName = "weir.john@itsligo.ie",
-                        Email = "weir.john@itsligo.ie",
-                        SecurityStamp = Guid.NewGuid().ToString(),
-                        EmailConfirmed = true,
-                        FirstName = "John",
-                        SecondName = "Weir",
-                        PasswordHash = ps.HashPassword("Jweir$1")
-                    },
-
-                   new ApplicationUser
-                    {
-                        UserName = "taylor.leonard@itsligo.ie",
-                        Email = "taylor.leonard@itsligo.ie",
-                        SecurityStamp = Guid.NewGuid().ToString(),
-                        EmailConfirmed = true,
-                        FirstName = "Leonard",
-                        SecondName = "Taylor",
-                        PasswordHash = ps.HashPassword("Ltaylor$1")
                     }
                });
 
@@ -126,11 +61,82 @@ namespace RADProjectWebAPI.Models
             ApplicationUser ChosenAdmin = manager.FindByEmail("powell.paul@itsligo.ie");
             if (ChosenAdmin != null)
             {
-                manager.AddToRoles(ChosenAdmin.Id, new string[] { "Admin" });
+                manager.AddToRoles(ChosenAdmin.Id, new string[] { "Admin", "Student", "Lecturer" });
             }
+
+            SeedStudentsApplicationUsers(manager, context);
+            SeedLecturersApplicationUsers(manager,context);
 
             context.SaveChanges();
             base.Seed(context);
+        }
+
+        //assigns all students a student role
+        private void SeedStudentsApplicationUsers(UserManager<ApplicationUser> manager, ApplicationDbContext context)
+        {
+            List<Student> students;
+            // Create Application Logins for all seeded students 
+            StudentAssigmentContext studentAssigmentContext = new StudentAssigmentContext();
+
+            students = studentAssigmentContext.Students.ToList();
+
+            PasswordHasher ps = new PasswordHasher();
+            foreach (var student in students)
+            {
+                context.Users.AddOrUpdate(u => u.UserName,
+                    new ApplicationUser
+                    {
+                        Email = student.FirstName+student.SecondName + "@itsligo.ie",
+                        UserName = student.FirstName + student.SecondName + "@itsligo.ie",
+                        EmailConfirmed = true,
+                        SecurityStamp = Guid.NewGuid().ToString(),
+                        PasswordHash = ps.HashPassword("Pass123$1")
+                    });
+                context.SaveChanges();
+
+                ApplicationUser addedUser = manager.FindByEmail(student.FirstName + student.SecondName + "@itsligo.ie");
+                if (addedUser != null)
+                {
+                    manager.AddToRole(addedUser.Id, "Student");
+                }
+                context.SaveChanges();
+
+            }
+            context.SaveChanges();
+        }
+
+        //assigns all lecturers a lecturer role
+        private void SeedLecturersApplicationUsers(UserManager<ApplicationUser> manager, ApplicationDbContext context)
+        {
+            List<Lecturer> lecturers;
+            // Create Application Logins for all seeded Lecturers 
+            StudentAssigmentContext studentAssigmentContext = new StudentAssigmentContext();
+
+            lecturers = studentAssigmentContext.Lecturers.ToList();
+
+            PasswordHasher ps = new PasswordHasher();
+            foreach (var lecturer in lecturers)
+            {
+                context.Users.AddOrUpdate(u => u.UserName,
+                    new ApplicationUser
+                    {
+                        Email = lecturer.FirstName + lecturer.SecondName + "@itsligo.ie",
+                        UserName = lecturer.FirstName + lecturer.SecondName + "@itsligo.ie",
+                        EmailConfirmed = true,
+                        SecurityStamp = Guid.NewGuid().ToString(),
+                        PasswordHash = ps.HashPassword("Pass123$1")
+                    });
+                context.SaveChanges();
+
+                ApplicationUser addedUser = manager.FindByEmail(lecturer.FirstName + lecturer.SecondName + "@itsligo.ie");
+                if (addedUser != null)
+                {
+                    manager.AddToRole(addedUser.Id, "Lecturer");
+                }
+                context.SaveChanges();
+
+            }
+            context.SaveChanges();
         }
     }
 }

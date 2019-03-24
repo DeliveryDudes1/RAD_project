@@ -14,11 +14,18 @@ namespace RADProject.DataDomain
         public DbSet<Lecturer> Lecturers { get; set; }
         public DbSet<StudentModule> StudentModules { get; set; }
         public DbSet<LecturerModule> LecturerModules { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<Lesson> Lessons { get; set; }
+        public DbSet<AssignmentResult> AssignmentResults { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
 
         public StudentAssigmentContext() : base("StudentAssignment")
         {
+            Configuration.LazyLoadingEnabled = false;
             Database.SetInitializer(new StudentAssignmentInitialzer());
             Database.Initialize(true);
+            
+
         }
     }
 }

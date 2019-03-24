@@ -21,9 +21,14 @@ namespace RADProject.DataDomain
         public string StudentID { get; set; }
         //bool yes no
         //lecturer id
+        [ForeignKey("associatedLecturer")]
+        public int LecturerID { get; set; }
         //bool attednecace
+        public bool Present { get; set; }
 
         public virtual Student associatedStudent { get; set; }
+        public virtual Lesson associatedLesson { get; set; }
+        public virtual Lecturer associatedLecturer { get; set; }
        
     }
 }

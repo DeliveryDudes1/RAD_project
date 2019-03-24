@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace RADProjectWebAPI
@@ -17,8 +18,16 @@ namespace RADProjectWebAPI
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
+            // Web API configuration and services
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling
+                = PreserveReferencesHandling.Objects;
+
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            // Enabling cors for call from Angular 4.3 client and others on different endpoints
+            //config.EnableCors();
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

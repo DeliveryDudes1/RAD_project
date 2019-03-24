@@ -14,12 +14,16 @@ namespace RADProject.DataDomain
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ResultID { get; set; }
+        [ForeignKey("associatedAssignment")]
         public int AssignmentID { get; set; }
-       // public int ModuleID { get; set; }
+        // public int ModuleID { get; set; }
+        [ForeignKey("associatedStudent")]
         public string StudentID { get; set; }
         //mark
+        public int Mark { get; set; }
 
         public virtual Student associatedStudent { get; set; }
+        public virtual Assignment associatedAssignment { get; set; }
        
     }
 }

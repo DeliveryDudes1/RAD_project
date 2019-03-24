@@ -18,10 +18,13 @@ namespace RADProject.DataDomain
         [ForeignKey("associatedModule")]
         public int ModuleID { get; set; }
         //lecturerid from link and students
+       // [ForeignKey("associatedLecturer")]
+       // public int LecturerID { get; set; }
         //forgien keys
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
 
         public virtual Module associatedModule { get; set; }
+       // public virtual Lecturer associatedLecturer { get; set; }
     }
 }
