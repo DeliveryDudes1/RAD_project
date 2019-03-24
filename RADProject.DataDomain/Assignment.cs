@@ -8,23 +8,20 @@ using System.Threading.Tasks;
 
 namespace RADProject.DataDomain
 {
-    [Table("Modules")]
-    public class Module
+    [Table("Assignments")]
+    public class Assignment
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int AssignmentID { get; set; }
+
+        [ForeignKey("associatedModule")]
         public int ModuleID { get; set; }
+        //public ICollection<Student> Students { get; set; }
         public string Name { get; set; }
-        public string Desription { get; set; }
-        //added this
-        //public ICollection<Assignment> Assignments { get; set; }
+        //lectuere id
 
-
-        public override string ToString()
-        {
-            return ModuleID.ToString() + " " + Name + " " + Desription;
-        }
-
-
+        
+        public virtual Module associatedModule { get; set; }
     }
 }
