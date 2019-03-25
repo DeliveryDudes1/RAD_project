@@ -77,8 +77,8 @@ namespace RADProject.DataDomain
         {
             List<Student> students = new List<Student>();
             Assembly assembly = Assembly.GetExecutingAssembly();
-
-            string resourceName = "RADProject.DataDomain.StudentList1.csv";
+            
+            string resourceName = "RADProject.DataDomain.CSVData.StudentList1.csv";
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             {
                 using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
@@ -95,5 +95,94 @@ namespace RADProject.DataDomain
             }
             context.SaveChanges();
         }
+        private void Seed_db_Assigments(StudentAssigmentContext assigmentContext)
+        {
+            List<Assignment> assigments = new List<Assignment>();
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            string resourceName = "RADProject.DataDomain.CSVData.Assigments.csv";
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                {
+                    CsvReader csvReader = new CsvReader(reader);
+                    csvReader.Configuration.HasHeaderRecord = false;
+                    csvReader.Configuration.MissingFieldFound = null;
+                    assigments = csvReader.GetRecords<Assignment>().ToList();
+                    foreach (var item in assigments)
+                    {
+                        assigmentContext.Assignments.AddOrUpdate(item);
+                    }
+                }
+            }
+            assigmentContext.SaveChanges();
+        }
+        private void Seed_db_AssigmentResults(StudentAssigmentContext assigmentresContext)
+        {
+            List<AssignmentResult> assigmentresults = new List<AssignmentResult>();
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            string resourceName = "RADProject.DataDomain.CSVData.AssigmentResults.csv";
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                {
+                    CsvReader csvReader = new CsvReader(reader);
+                    csvReader.Configuration.HasHeaderRecord = false;
+                    csvReader.Configuration.MissingFieldFound = null;
+                    assigmentresults = csvReader.GetRecords<AssignmentResult>().ToList();
+                    foreach (var item in assigmentresults)
+                    {
+                        assigmentresContext.AssignmentResults.AddOrUpdate(item);
+                    }
+                }
+            }
+            assigmentresContext.SaveChanges();
+        }
+        private void Seed_db_Attendance(StudentAssigmentContext attendanceContext)
+        {
+            List<Attendance> attendances = new List<Attendance>();
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            string resourceName = "RADProject.DataDomain.CSVData.Attendance.csv";
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                {
+                    CsvReader csvReader = new CsvReader(reader);
+                    csvReader.Configuration.HasHeaderRecord = false;
+                    csvReader.Configuration.MissingFieldFound = null;
+                    attendances = csvReader.GetRecords<Attendance>().ToList();
+                    foreach (var item in attendances)
+                    {
+                        attendanceContext.Attendances.AddOrUpdate(item);
+                    }
+                }
+            }
+            attendanceContext.SaveChanges();
+        }
+        private void Seed_db_Modules(StudentAssigmentContext Modulescontext)
+        {
+            List<Module> modules = new List<Module>();
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            string resourceName = "RADProject.DataDomain.CSVData.Modules.csv";
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                {
+                    CsvReader csvReader = new CsvReader(reader);
+                    csvReader.Configuration.HasHeaderRecord = false;
+                    csvReader.Configuration.MissingFieldFound = null;
+                    modules = csvReader.GetRecords<Module>().ToList();
+                    foreach (var item in modules)
+                    {
+                        Modulescontext.Modules.AddOrUpdate(item);
+                    }
+                }
+            }
+            Modulescontext.SaveChanges();
+        }
+
     }
 }

@@ -70,10 +70,14 @@
     <Compile Include="StudentModule.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="StudentList1.csv" />
+    <EmbeddedResource Include="CSVData\StudentList1.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="CSVData\AssigmentResults.csv" />
+    <None Include="CSVData\Assigments.csv" />
+    <None Include="CSVData\Attendance.csv" />
+    <None Include="CSVData\Modules.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
