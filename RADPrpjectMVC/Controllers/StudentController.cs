@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using RADProject.DataDomain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
@@ -33,6 +36,13 @@ namespace RADPrpjectMVC.Controllers
             }
             return View();
 
+
         }
+
+        //public IEnumerable<Student> GetAllRecords()
+        //{
+        //    return Request.CreateResponse<List<Student>>(HttpStatusCode.OK, listOfStudents);
+        //}
     }
+
 }
