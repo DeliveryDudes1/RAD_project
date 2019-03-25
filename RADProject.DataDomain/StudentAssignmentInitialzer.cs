@@ -68,6 +68,11 @@ namespace RADProject.DataDomain
                 }
              });
 
+            //Seed_db_Students(context);
+            //Seed_db_Assigments(context);
+            //Seed_db_AssigmentResults(context);
+            //Seed_db_Attendance(context);
+            //Seed_db_Modules(context);
 
             context.SaveChanges();
             base.Seed(context);

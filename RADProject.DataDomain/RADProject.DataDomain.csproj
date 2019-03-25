@@ -57,6 +57,7 @@
     <Compile Include="Assignment.cs" />
     <Compile Include="AssignmentResult.cs" />
     <Compile Include="Attendance.cs" />
+    <Compile Include="DTO\AssignmentDTO.cs" />
     <Compile Include="DTO\LecturerModuleDTO.cs" />
     <Compile Include="DTO\StudentModuleDTO.cs" />
     <Compile Include="Lecturer.cs" />
