@@ -13,12 +13,28 @@ using RADProject.DataDomain.DTO;
 namespace WebAPIClient
 {
     public enum AUTHSTATUS { NONE, OK, INVALID, FAILED }
+
     public static class UserAuthentication
     {
         static public string baseWebAddress;
         static public string UserToken = "";
         static public AUTHSTATUS UserStatus = AUTHSTATUS.NONE;
-        static public string IgdbUserToken = ""; // You'll need to ignup for your own Token Here
+        static public string IgdbUserToken = "PUT YOUR EXTERNAL WEB API TOKEN HERE"; // You'll need to ignup for your own Token Here
+
+        // Example Endpoint api/GameScores/getTops/Count/
+        static public List<T> getList<T>(string endpoint)
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UserToken);
+                var response = client.GetAsync(baseWebAddress + endpoint).Result;
+                var resultContent = response.Content.ReadAsAsync<List<T>>(
+                    new[] { new JsonMediaTypeFormatter() }).Result;
+                return resultContent;
+            }
+        }
 
         static public UserProfile getUserProfile()
         {
@@ -65,6 +81,31 @@ namespace WebAPIClient
                     return true;
                 }
                 return false;
+            }
+        }
+
+        static public dynamic getExtModule(int moduleID)
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("user-key", IgdbUserToken);
+                var response = client.GetAsync("https://api-endpoint.igdb.com/modules/" + moduleID.ToString()).Result;
+                var resultContent = response.Content.ReadAsAsync<JToken>(
+                    new[] { new JsonMediaTypeFormatter() }).Result;
+                var jname = resultContent.Children()["name"].Values<string>().FirstOrDefault();
+                var jsummary = resultContent.Children()["summary"].Values<string>().FirstOrDefault();
+                // url is nested in cover object
+                var jcover = resultContent.Children()["cover"]["url"].Values<string>().FirstOrDefault();
+                var eobj =
+                                        new
+                                        {
+                                            Name = jname,
+                                            Summary = jsummary,
+                                            Cover = jcover
+                                        };
+                return eobj;
             }
         }
 
