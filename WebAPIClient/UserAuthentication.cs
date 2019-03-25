@@ -67,6 +67,23 @@ namespace WebAPIClient
             }
         }
 
+        static public bool PostAssignmentToStudent(StudentModuleDTO s)
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var response = client.PostAsJsonAsync(baseWebAddress + "api/admin/assignAssignmentToStudent", s).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Response Object is " + response.Content.ReadAsAsync<StudentModuleDTO>(
+                        new[] { new JsonMediaTypeFormatter() }).Result.ToString());
+                    return true;
+                }
+                return false;
+            }
+        }
+
         static public bool PostModuleToLecturer(LecturerModuleDTO l)
         {
             using (var client = new HttpClient())
@@ -104,6 +121,31 @@ namespace WebAPIClient
                                             Name = mname,
                                             Summary = msummary,
                                             Cover = mcover
+                                        };
+                return eobj;
+            }
+        }
+
+        static public dynamic getExtAssignment(int assignmentID)
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("user-key", IgdbUserToken);
+                var response = client.GetAsync("https://api-endpoint.igdb.com/modules/" + assignmentID.ToString()).Result;
+                var resultContent = response.Content.ReadAsAsync<JToken>(
+                    new[] { new JsonMediaTypeFormatter() }).Result;
+                var aname = resultContent.Children()["name"].Values<string>().FirstOrDefault();
+                var asummary = resultContent.Children()["summary"].Values<string>().FirstOrDefault();
+                // url is nested in cover object
+                var acover = resultContent.Children()["cover"]["url"].Values<string>().FirstOrDefault();
+                var eobj =
+                                        new
+                                        {
+                                            Name = aname,
+                                            Summary = asummary,
+                                            Cover = acover
                                         };
                 return eobj;
             }
