@@ -94,16 +94,16 @@ namespace WebAPIClient
                 var response = client.GetAsync("https://api-endpoint.igdb.com/modules/" + moduleID.ToString()).Result;
                 var resultContent = response.Content.ReadAsAsync<JToken>(
                     new[] { new JsonMediaTypeFormatter() }).Result;
-                var jname = resultContent.Children()["name"].Values<string>().FirstOrDefault();
-                var jsummary = resultContent.Children()["summary"].Values<string>().FirstOrDefault();
+                var mname = resultContent.Children()["name"].Values<string>().FirstOrDefault();
+                var msummary = resultContent.Children()["summary"].Values<string>().FirstOrDefault();
                 // url is nested in cover object
-                var jcover = resultContent.Children()["cover"]["url"].Values<string>().FirstOrDefault();
+                var mcover = resultContent.Children()["cover"]["url"].Values<string>().FirstOrDefault();
                 var eobj =
                                         new
                                         {
-                                            Name = jname,
-                                            Summary = jsummary,
-                                            Cover = jcover
+                                            Name = mname,
+                                            Summary = msummary,
+                                            Cover = mcover
                                         };
                 return eobj;
             }
