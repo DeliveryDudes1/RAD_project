@@ -10,6 +10,7 @@ namespace RADPrpjectMVC.Controllers
     {
         public ActionResult Index()
         {
+            var listOfStudents = new StudentController().
             return View();
         }
 
@@ -26,5 +27,6 @@ namespace RADPrpjectMVC.Controllers
 
             return View();
         }
+
     }
 }
