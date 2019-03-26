@@ -16,52 +16,51 @@ namespace RADProjectWebAPI.Controllers
     [RoutePrefix("api/lecturer")]
     public class LecturerController : ApiController
     {
-        AdminRepository db = new AdminRepository();
+        LecturerRepository db = new LecturerRepository();
 
-        //post student module
-        [System.Web.Http.HttpPost]
-        [Route("AssignStudentToModule")]
-        public void AssignStudentToModule(StudentModuleDTO studentModuleDTO)
+        [HttpPost]
+        [Route("MakeAssignment")]
+        //post lecturer module
+        public void MakeAssignment(AssignmentDTO assignmentDTO)
         {
             if (ModelState.IsValid)
             {
-                db.AssignStudentToModule(studentModuleDTO);
+                db.MakeAssignment(assignmentDTO);
                 db.Save();
             }
-
         }
 
         [HttpPost]
-        [Route("AssignLecturerToModule")]
-        //post lecturer module
-        public void AssignLecturerToModule(LecturerModuleDTO lecturerModuleDTO)
+        [Route("RecordAttendance")]
+        
+        public void RecordAttendance(AttendaceDTO attendaceDTO)
         {
             if (ModelState.IsValid)
             {
-                db.AssignLecturerToModule(lecturerModuleDTO);
+                db.RecordAttendance(attendaceDTO);
+                db.Save();
+            }
+        }
+
+        [HttpPost]
+        [Route("RecordAssigmentResult")]
+        
+        public void RecordAssigmentResult(ResultsDTO resultsDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                db.RecordAssigmentResult(resultsDTO);
                 db.Save();
             }
         }
 
         [HttpGet]
-        [Route("AllLecturers")]
-        public IEnumerable<Lecturer> GetLecturer()
+        [Route("GetAllModules")]
+        public IEnumerable<Module> GetAllModules(int id)
         {
-            return db.GetAllLecturer();
+            return db.GetAllModules(id);
         }
 
-        [HttpGet]
-        [Route("AllStudents")]
-        public IEnumerable<Student> GetStudent()
-        {
-            return db.GetAllStudents();
-        }
-
-        [HttpGet]
-        [Route("AllModules")]
-        public IEnumerable<Module> GetModule()
-        {
-            return db.GetAllModule();
-        }
+       
     }
 }

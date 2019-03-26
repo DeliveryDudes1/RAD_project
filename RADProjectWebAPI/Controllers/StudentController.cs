@@ -16,52 +16,27 @@ namespace RADProjectWebAPI.Controllers
     [RoutePrefix("api/student")]
     public class StudentController : ApiController
     {
-        AdminRepository db = new AdminRepository();
+        StudentRepository db = new StudentRepository();
 
-        //post student module
-        [System.Web.Http.HttpPost]
-        [Route("AssignStudentToModule")]
-        public void AssignStudentToModule(StudentModuleDTO studentModuleDTO)
+        [HttpGet]
+        [Route("GetAllAttendance")]
+        public IEnumerable<Attendance> GetAllAttendance(string id)
         {
-            if (ModelState.IsValid)
-            {
-                db.AssignStudentToModule(studentModuleDTO);
-                db.Save();
-            }
-
-        }
-
-        [HttpPost]
-        [Route("AssignLecturerToModule")]
-        //post lecturer module
-        public void AssignLecturerToModule(LecturerModuleDTO lecturerModuleDTO)
-        {
-            if (ModelState.IsValid)
-            {
-                db.AssignLecturerToModule(lecturerModuleDTO);
-                db.Save();
-            }
+            return db.GetAllAttendance(id);
         }
 
         [HttpGet]
-        [Route("AllLecturers")]
-        public IEnumerable<Lecturer> GetLecturer()
+        [Route("GetAllModules")]
+        public IEnumerable<Module> GetAllModules(string id)
         {
-            return db.GetAllLecturer();
+            return db.GetAllModules(id);
         }
 
         [HttpGet]
-        [Route("AllStudents")]
-        public IEnumerable<Student> GetStudent()
+        [Route("GetAllResults")]
+        public IEnumerable<AssignmentResult> GetAllResults(string id)
         {
-            return db.GetAllStudents();
-        }
-
-        [HttpGet]
-        [Route("AllModules")]
-        public IEnumerable<Module> GetModule()
-        {
-            return db.GetAllModule();
+            return db.GetAllResults(id);
         }
     }
 }
